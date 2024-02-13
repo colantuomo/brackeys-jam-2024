@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField]
     private Transform _flashLight;
+    private Vector2 _currentVelocity = Vector2.zero;
+    [SerializeField]
+    private float _accelerationTime = 0.1f;
 
     void Start()
     {
@@ -20,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
-
         Vector2 mousePosition = _cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 lookDirection = mousePosition - _rb.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
@@ -30,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + GameSettings.Singleton.PlayerSpeed * Time.fixedDeltaTime * _movement.normalized);
+        //_rb.MovePosition(_rb.position + GameSettings.Singleton.PlayerSpeed * Time.fixedDeltaTime * _movement.normalized);
+
+        Vector2 targetVelocity = _movement.normalized * GameSettings.Singleton.PlayerSpeed;
+        _rb.velocity = Vector2.SmoothDamp(_rb.velocity, targetVelocity, ref _currentVelocity, _accelerationTime);
     }
 }

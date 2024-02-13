@@ -1031,6 +1031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flashLight: {fileID: 2116711028}
+  _accelerationTime: 0.1
 --- !u!50 &837140360
 Rigidbody2D:
   serializedVersion: 4
@@ -1190,7 +1191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268440418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.554314, y: 89.80649, z: 2.128485}
+  m_LocalPosition: {x: -49.7, y: 89.80649, z: 2.128485}
   m_LocalScale: {x: 5, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
