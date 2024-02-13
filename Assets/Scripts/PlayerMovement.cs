@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //_rb.MovePosition(_rb.position + GameSettings.Singleton.PlayerSpeed * Time.fixedDeltaTime * _movement.normalized);
-
         Vector2 targetVelocity = _movement.normalized * GameSettings.Singleton.PlayerSpeed;
         _rb.velocity = Vector2.SmoothDamp(_rb.velocity, targetVelocity, ref _currentVelocity, _accelerationTime);
     }
