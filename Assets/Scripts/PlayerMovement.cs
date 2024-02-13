@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 targetVelocity = _movement.normalized * GameSettings.Singleton.PlayerSpeed;
+        Vector2 targetVelocity = _movement.normalized * GameSettings.Instance.PlayerSpeed;
         _rb.velocity = Vector2.SmoothDamp(_rb.velocity, targetVelocity, ref _currentVelocity, _accelerationTime);
     }
 }
