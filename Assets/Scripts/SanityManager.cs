@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SanityManager : MonoBehaviour
 {
     public float sanityLevel;
     public float sanityDecreaseRateSeconds;
     private float _totalIntervalSecondsElapsed;
+    public GameObject sanityBar;
 
     void Start()
     {
@@ -18,12 +20,13 @@ public class SanityManager : MonoBehaviour
 
     void Update()
     {
-        _totalIntervalSecondsElapsed += Time.deltaTime; 
-        if(_totalIntervalSecondsElapsed >= sanityDecreaseRateSeconds)
+        _totalIntervalSecondsElapsed += Time.deltaTime;
+        if(_totalIntervalSecondsElapsed >= 1)
         {
-            _totalIntervalSecondsElapsed -= sanityDecreaseRateSeconds;
-            sanityLevel--;
+            _totalIntervalSecondsElapsed -= 1;
+            sanityLevel -= sanityDecreaseRateSeconds;
         }
+        sanityBar.GetComponent<Slider>().value = (int)sanityLevel;
 
         // Update stuff based on sanity
         // UpdateMusicPitch();
