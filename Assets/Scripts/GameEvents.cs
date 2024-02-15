@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameEvents : MonoBehaviour
+public class GameEvents : Singleton<GameEvents>
 {
-    public static GameEvents Singleton { get; private set; }
+    // public static GameEvents Singleton { get; private set; }
 
-    private void Awake()
-    {
-        if (Singleton != null && Singleton != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Singleton = this;
-        }
-    }
+    // private void Awake()
+    // {
+    //     if (Singleton != null && Singleton != this)
+    //     {
+    //         Destroy(this);
+    //     }
+    //     else
+    //     {
+    //         Singleton = this;
+    //     }
+    // }
 
     public event Action OnPlayerCollectedBattery;
     public void PlayerCollectedBattery()

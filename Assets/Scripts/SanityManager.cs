@@ -32,8 +32,8 @@ public class SanityManager : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        GameEvents.Singleton.OnUpdateSanityLevel += OnUpdateSanityLevel;
-        GameEvents.Singleton.OnUpdateSanityDecreaseRate += OnUpdateSanityDecreaseRate;
+        GameEvents.Instance.OnUpdateSanityLevel += OnUpdateSanityLevel;
+        GameEvents.Instance.OnUpdateSanityDecreaseRate += OnUpdateSanityDecreaseRate;
     }
 
     void OnUpdateSanityLevel(float sanityDecreaseAmount)
