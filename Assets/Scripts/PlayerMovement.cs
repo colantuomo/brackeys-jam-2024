@@ -17,10 +17,19 @@ public class PlayerMovement : MonoBehaviour
     {
         _cam = Camera.main;
         _rb = GetComponent<Rigidbody2D>();
+        GameSettings.Instance.OnChangeGameState += OnChangeGameState;
+    }
+
+    private void OnChangeGameState(GameStates state)
+    {
+        _movement = Vector2.zero;
+        _rb.velocity = Vector2.zero;
     }
 
     void Update()
     {
+        if (GameSettings.Instance.GameState != GameStates.Playing) return;
+
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
         Vector2 mousePosition = _cam.ScreenToWorldPoint(Input.mousePosition);
@@ -32,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameSettings.Instance.GameState != GameStates.Playing) return;
+
         Vector2 targetVelocity = _movement.normalized * GameSettings.Instance.PlayerSpeed;
         _rb.velocity = Vector2.SmoothDamp(_rb.velocity, targetVelocity, ref _currentVelocity, _accelerationTime);
     }
