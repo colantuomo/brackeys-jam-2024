@@ -42,9 +42,9 @@ public class GameEvents : Singleton<GameEvents>
     }
 
     public event Action<float> OnUpdateSanityLevel;
-    public void UpdateSanityLevel(float sanityDecreaseAmount)
+    public void UpdateSanityLevel(float sanityAmount)
     {
-        OnUpdateSanityLevel?.Invoke(sanityDecreaseAmount);
+        OnUpdateSanityLevel?.Invoke(sanityAmount);
     }
 
     public event Action<float> OnUpdateSanityDecreaseRate;
