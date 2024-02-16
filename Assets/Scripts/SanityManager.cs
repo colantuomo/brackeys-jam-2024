@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using Unity.Mathematics;
 
 public class SanityManager : MonoBehaviour
 {
@@ -9,6 +13,7 @@ public class SanityManager : MonoBehaviour
     public float sanityDecreaseRateSeconds;
     private float _totalIntervalSecondsElapsed;
     public GameObject sanityBar;
+    public Volume volume;
 
     void Start()
     {
@@ -26,8 +31,12 @@ public class SanityManager : MonoBehaviour
             _totalIntervalSecondsElapsed -= 1;
             sanityLevel -= sanityDecreaseRateSeconds;
             sanityLevel = Mathf.Max(sanityLevel, 0);
+            if(volume.profile.TryGet(out Vignette vignette)){
+                vignette.intensity.value = math.remap(100f, 0, 0.3f, 0.8f, sanityLevel);
+            }
+
+            sanityBar.GetComponent<Slider>().value = (int)sanityLevel;
         }
-        sanityBar.GetComponent<Slider>().value = (int)sanityLevel;
 
         // Update stuff based on sanity
         // UpdateMusicPitch();
