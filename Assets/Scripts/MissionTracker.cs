@@ -10,9 +10,9 @@ using UnityEngine.UI;
 public class MissionTracker : MonoBehaviour
 {
     [SerializeField]
-    private Image _introPanel;
+    private Image _introPanel, _objectivePlaceholder;
     [SerializeField]
-    private TMP_Text _objectiveTXT;
+    private TMP_Text _objectiveTXT, _moveTipTXT;
     [SerializeField]
     private List<Light2D> _sceneLights = new();
     [SerializeField]
@@ -24,12 +24,25 @@ public class MissionTracker : MonoBehaviour
     private Mission3 _mission3;
     [SerializeField]
     private Mission4 _mission4;
+    [SerializeField]
+    private FinalMission _finalMission;
+    [SerializeField]
+    private GameObject _powerRoomDoor;
 
     private void Start()
     {
         GameEvents.Instance.OnTurnOffAllTheLights += OnTurnOffAllTheLights;
         _introPanel.DOFade(1, 0f);
         _introPanel.DOFade(0, 5f);
+        _moveTipTXT.DOFade(0, 0f);
+        DOVirtual.Float(0, 1, 5f, (v) => { }).OnComplete(() =>
+        {
+            _moveTipTXT.DOFade(1, 3f).OnComplete(() =>
+            {
+                _moveTipTXT.DOFade(0, 3f);
+            });
+        });
+        _objectivePlaceholder.DOFade(0, 0f);
     }
 
     private void OnTurnOffAllTheLights()
@@ -43,6 +56,7 @@ public class MissionTracker : MonoBehaviour
 
     public Tween ClearObjective()
     {
+        _objectivePlaceholder.DOFade(0, .5f);
         return _objectiveTXT.DOFade(0, .5f).OnComplete(() =>
         {
             _objectiveTXT.text = "";
@@ -53,6 +67,7 @@ public class MissionTracker : MonoBehaviour
     {
         ClearObjective().OnComplete(() =>
         {
+            _objectivePlaceholder.DOFade(1, .5f);
             _objectiveTXT.DOFade(1, .5f).OnComplete(() =>
             {
                 //_objectiveTXT.transform.DOShakeScale(.2f);
@@ -72,18 +87,27 @@ public class MissionTracker : MonoBehaviour
     public void StartMission3()
     {
         SetNewObjective("Encontre seu smartphone");
-        DOVirtual.Float(0, 1, GameSettings.Instance.TimeToStartSecondMission, (v) => { }).OnComplete(() =>
-        {
-            _mission3.gameObject.SetActive(true);
-        });
+        _mission3.gameObject.SetActive(true);
     }
 
     public void StartMission4()
     {
         SetNewObjective("Pegue seu remédio");
-        DOVirtual.Float(0, 1, GameSettings.Instance.TimeToStartSecondMission, (v) => { }).OnComplete(() =>
-        {
-            _mission4.gameObject.SetActive(true);
-        });
+        _mission4.gameObject.SetActive(true);
+    }
+
+    public void StartFinalMission()
+    {
+        _finalMission.gameObject.SetActive(true);
+    }
+
+    public void TurnOffLightningLight()
+    {
+        _lightningLight.gameObject.SetActive(false);
+    }
+
+    public void OpenLastRoomDoor()
+    {
+        _powerRoomDoor.SetActive(true);
     }
 }

@@ -9,13 +9,17 @@ public class TextPanelManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _textBox;
     [SerializeField]
-    private float _openDistance = 200f, _timeToOpen = 1f;
+    private float _timeToOpen = 1f;
+    [SerializeField]
+    private Transform _pointToSlide;
+    private Vector2 _defaultPosition;
     bool _isOpen;
 
     private void Start()
     {
         GameEvents.Instance.OnShowTextPanel += Open;
         GameEvents.Instance.OnCloseTextPanel += Close;
+        _defaultPosition = transform.position;
     }
 
     public void Open(string text)
@@ -26,7 +30,7 @@ public class TextPanelManager : MonoBehaviour
         }
         transform.DOKill();
         _textBox.text = text;
-        transform.DOMoveY(transform.position.y + _openDistance, _timeToOpen).SetEase(Ease.OutBack);
+        transform.DOMove(_pointToSlide.position, _timeToOpen).SetEase(Ease.OutBack);
         _isOpen = true;
     }
 
@@ -34,6 +38,6 @@ public class TextPanelManager : MonoBehaviour
     {
         _isOpen = false;
         transform.DOKill();
-        transform.DOMoveY(transform.position.y + -_openDistance, _timeToOpen - 0.5f);
+        transform.DOMove(_defaultPosition + new Vector2(0, -50f), _timeToOpen - 0.5f);
     }
 }

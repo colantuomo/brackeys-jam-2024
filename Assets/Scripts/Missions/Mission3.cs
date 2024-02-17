@@ -10,6 +10,8 @@ public class Mission3 : MonoBehaviour
     [SerializeField]
     private MissionTracker _missionTracker;
     private bool _pickedPhone;
+    [SerializeField]
+    private InteractableBehaviour _interactableText;
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -18,12 +20,14 @@ public class Mission3 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //GameSettings.Instance.ChangeGameState(GameStates.CutScene);
+        _interactableText.ShowText("Press F to grab your phone");
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (Input.GetKeyDown(KeyCode.F) && !_pickedPhone)
         {
+            _interactableText.HideText();
             _pickedPhone = true;
             _missionTracker.ClearObjective();
             _audioSource.enabled = false;
@@ -35,6 +39,7 @@ public class Mission3 : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _interactableText.HideText();
         if (!_pickedPhone) return;
         _missionTracker.StartMission4();
         GameEvents.Instance.CloseTextPanel();

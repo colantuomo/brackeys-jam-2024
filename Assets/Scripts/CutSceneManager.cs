@@ -15,6 +15,16 @@ public class CutSceneManager : MonoBehaviour
     {
         GameEvents.Instance.OnEnterCutScene += OnEnterCutScene;
         GameEvents.Instance.OnLeaveCutScene += OnLeaveCutScene;
+        var midScreenSize = Camera.main.orthographicSize * Screen.width / Screen.height;
+        var topPosition = midScreenSize * 2.2f;
+        var bottomPosition = midScreenSize - (midScreenSize + 50f);
+        //_topFX.position = new Vector2(_topFX.position.x, topPosition);
+        //bottomFX.position = new Vector2(_topFX.position.x, bottomPosition);
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void OnEnterCutScene()
