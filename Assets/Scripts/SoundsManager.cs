@@ -83,4 +83,9 @@ public class SoundsManager : Singleton<SoundsManager>
     {
         _audioSourceFXs.PlayOneShot(clip);
     }
+
+    public Tween ReduceRainToZero()
+    {
+        return _audioSourceLoop.DOFade(0, 5f);
+    }
 }

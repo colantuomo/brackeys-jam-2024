@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DoorNoise : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class DoorNoise : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField]
     private float _noiseDamage = 5f;
+    [SerializeField]
+    private SpriteRenderer _barricadedDoor, _soundNoiseLeft, _soundNoiseRight;
+    [SerializeField]
+    private NoiseDamageArea _noiseDamageArea;
 
     float timer;
     float interval = 1;
@@ -58,13 +63,16 @@ public class DoorNoise : MonoBehaviour
 
     private void Barricate()
     {
-        _audioSource.gameObject.SetActive(false);
+        _barricadedDoor.gameObject.SetActive(true);
+        _audioSource.enabled = false;
         SoundsManager.Instance.PlayDoorBaricated();
-        gameObject.SetActive(false);
+        _noiseDamageArea.gameObject.SetActive(false);
+        _interactableText.gameObject.SetActive(false);
     }
 
     public void TakeNoiseDamage()
     {
+        ShowVisualNoiseFX();
         GameEvents.Instance.UpdateSanityDecreaseRate(_noiseDamage);
     }
 
@@ -77,5 +85,11 @@ public class DoorNoise : MonoBehaviour
     {
         //_audioSource.Stop();
         _audioSource.PlayOneShot(GetRandomKnockSound());
+    }
+
+    private void ShowVisualNoiseFX()
+    {
+        //_soundNoiseLeft.transform.DOShakeScale(.2f, 0.1f, 1).SetLoops(-1).SetDelay(1f);
+        //_soundNoiseRight.transform.DOShakeScale(.2f, 0.1f, 1).SetLoops(-1).SetDelay(1f);
     }
 }

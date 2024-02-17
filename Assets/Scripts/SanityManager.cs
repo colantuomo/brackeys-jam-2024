@@ -43,12 +43,14 @@ public class SanityManager : MonoBehaviour
             if (volume.profile.TryGet(out Vignette vignette))
             {
                 vignette.intensity.value = math.remap(120f, 0, 0.2f, 0.8f, sanityLevel);
-                print(vignette.intensity.value);
+                //print(vignette.intensity.value);
             }
             _slider.value = (int)sanityLevel;
-            if (sanityLevel < 52)
+            if (sanityLevel < 53)
             {
                 print("You died");
+                Pause();
+                GameEvents.Instance.PlayerDied();
             }
         }
 

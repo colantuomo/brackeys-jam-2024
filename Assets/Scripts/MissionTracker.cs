@@ -34,6 +34,7 @@ public class MissionTracker : MonoBehaviour
     private void Start()
     {
         GameEvents.Instance.OnTurnOffAllTheLights += OnTurnOffAllTheLights;
+        GameEvents.Instance.OnPlayerDied += OnPlayerDied;
         _introPanel.DOFade(1, 0f);
         _introPanel.DOFade(0, 5f);
         _moveTipTXT.DOFade(0, 0f);
@@ -45,6 +46,11 @@ public class MissionTracker : MonoBehaviour
             });
         });
         _objectivePlaceholder.DOFade(0, 0f);
+    }
+
+    private void OnPlayerDied()
+    {
+        // Load Game Over scene
     }
 
     private void OnTurnOffAllTheLights()

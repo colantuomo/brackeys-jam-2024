@@ -28,6 +28,7 @@ public class Mission3 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && !_pickedPhone)
         {
+            _missionTracker.TurnOffLightningLight();
             _interactableText.HideText();
             _pickedPhone = true;
             _missionTracker.ClearObjective();

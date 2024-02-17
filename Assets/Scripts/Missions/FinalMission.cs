@@ -13,6 +13,16 @@ public class FinalMission : MonoBehaviour
     [SerializeField]
     private PlayerInteractions _playerInteractions;
 
+    private void Start()
+    {
+        GameEvents.Instance.OnPlayerDied += OnPlayerDied;
+    }
+
+    private void OnPlayerDied()
+    {
+        EngameManager.Instance.LoadEndgame();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _interactableText.ShowText("Press F to turn on the power");
@@ -28,12 +38,13 @@ public class FinalMission : MonoBehaviour
             _playerInteractions.TurnOffFlashlight();
             _finalDoorNoise.SetActive(true);
             _missionTracker.CloseLastRoomDoor();
+            gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _interactableText.HideText();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }
