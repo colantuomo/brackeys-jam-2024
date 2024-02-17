@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MissionTracker : MonoBehaviour
 {
     [SerializeField]
-    private Image _introPanel;
+    private Image _introPanel, _objectivePlaceholder;
     [SerializeField]
     private TMP_Text _objectiveTXT, _moveTipTXT;
     [SerializeField]
@@ -42,6 +42,7 @@ public class MissionTracker : MonoBehaviour
                 _moveTipTXT.DOFade(0, 3f);
             });
         });
+        _objectivePlaceholder.DOFade(0, 0f);
     }
 
     private void OnTurnOffAllTheLights()
@@ -55,6 +56,7 @@ public class MissionTracker : MonoBehaviour
 
     public Tween ClearObjective()
     {
+        _objectivePlaceholder.DOFade(0, .5f);
         return _objectiveTXT.DOFade(0, .5f).OnComplete(() =>
         {
             _objectiveTXT.text = "";
@@ -65,6 +67,7 @@ public class MissionTracker : MonoBehaviour
     {
         ClearObjective().OnComplete(() =>
         {
+            _objectivePlaceholder.DOFade(1, .5f);
             _objectiveTXT.DOFade(1, .5f).OnComplete(() =>
             {
                 //_objectiveTXT.transform.DOShakeScale(.2f);
