@@ -13,7 +13,7 @@ public class EngameManager : Singleton<EngameManager>
 
     private void Start()
     {
-        GameEvents.Instance.OnPlayerDied += LoadGameOver;
+        //GameEvents.Instance.OnPlayerDied += LoadGameOver;
     }
 
     public void LoadEndgame()

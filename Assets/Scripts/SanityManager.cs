@@ -46,11 +46,27 @@ public class SanityManager : MonoBehaviour
                 //print(vignette.intensity.value);
             }
             _slider.value = (int)sanityLevel;
+            if (sanityLevel < 70)
+            {
+                if (volume.profile.TryGet(out SplitToning splitToning))
+                {
+                    splitToning.active = true;
+                }
+            }
+            else
+            {
+                if (volume.profile.TryGet(out SplitToning splitToning))
+                {
+                    splitToning.active = false;
+                }
+            }
             if (sanityLevel < 53)
             {
-                print("You died");
+                DOTween.KillAll();
+                //print("You died");
                 Pause();
                 GameEvents.Instance.PlayerDied();
+                //GameSettings.Instance.ChangeGameState(GameStates.CutScene);
             }
         }
 
@@ -100,7 +116,7 @@ public class SanityManager : MonoBehaviour
 
     public void HideSanityBar()
     {
-        sanityBar.transform.DOScale(Vector3.zero, 0);
+        sanityBar.transform.DOScale(Vector3.zero, 0.1f);
     }
 
 }

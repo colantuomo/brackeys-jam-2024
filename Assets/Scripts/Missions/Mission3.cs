@@ -33,7 +33,7 @@ public class Mission3 : MonoBehaviour
             _pickedPhone = true;
             _missionTracker.ClearObjective();
             _audioSource.enabled = false;
-            GameEvents.Instance.ShowTextPanel("Achei!\nDroga! ta na hora de eu tomar meu remédio.. sei que está aqui no quarto em algum lugar..");
+            GameEvents.Instance.ShowTextPanel("Ah, here it is! \nIt's time for me to take my medication, I know it's somewhere in this room...");
             _playerInteractions.TurnOnFlashlight();
             GameEvents.Instance.ContinueSanityDecreasing();
             GameSettings.Instance.ChangeGameState(GameStates.CutScene);

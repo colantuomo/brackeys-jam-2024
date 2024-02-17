@@ -34,7 +34,6 @@ public class MissionTracker : MonoBehaviour
     private void Start()
     {
         GameEvents.Instance.OnTurnOffAllTheLights += OnTurnOffAllTheLights;
-        GameEvents.Instance.OnPlayerDied += OnPlayerDied;
         _introPanel.DOFade(1, 0f);
         _introPanel.DOFade(0, 5f);
         _moveTipTXT.DOFade(0, 0f);
@@ -46,11 +45,6 @@ public class MissionTracker : MonoBehaviour
             });
         });
         _objectivePlaceholder.DOFade(0, 0f);
-    }
-
-    private void OnPlayerDied()
-    {
-        // Load Game Over scene
     }
 
     private void OnTurnOffAllTheLights()
@@ -94,13 +88,13 @@ public class MissionTracker : MonoBehaviour
 
     public void StartMission3()
     {
-        SetNewObjective("Encontre seu smartphone");
+        SetNewObjective("Find your Phone");
         _mission3.gameObject.SetActive(true);
     }
 
     public void StartMission4()
     {
-        SetNewObjective("Pegue seu remédio");
+        SetNewObjective("Find your medication");
         _mission4.gameObject.SetActive(true);
     }
 

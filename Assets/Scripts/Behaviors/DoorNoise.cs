@@ -20,6 +20,8 @@ public class DoorNoise : MonoBehaviour
     float timer;
     float interval = 1;
 
+    private bool _isBarricaded;
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -27,6 +29,8 @@ public class DoorNoise : MonoBehaviour
 
     private void Update()
     {
+        if (_isBarricaded) return;
+
         timer += Time.deltaTime;
         if (timer > interval)
         {
@@ -68,10 +72,14 @@ public class DoorNoise : MonoBehaviour
         SoundsManager.Instance.PlayDoorBaricated();
         _noiseDamageArea.gameObject.SetActive(false);
         _interactableText.gameObject.SetActive(false);
+        _isBarricaded = true;
+        DisableNoiseVisualFXs();
     }
 
     public void TakeNoiseDamage()
     {
+        if (_isBarricaded) return;
+
         ShowVisualNoiseFX();
         GameEvents.Instance.UpdateSanityDecreaseRate(_noiseDamage);
     }
@@ -89,7 +97,13 @@ public class DoorNoise : MonoBehaviour
 
     private void ShowVisualNoiseFX()
     {
-        //_soundNoiseLeft.transform.DOShakeScale(.2f, 0.1f, 1).SetLoops(-1).SetDelay(1f);
-        //_soundNoiseRight.transform.DOShakeScale(.2f, 0.1f, 1).SetLoops(-1).SetDelay(1f);
+        _soundNoiseLeft.transform.DOShakeScale(.2f, 0.01f, 1).SetLoops(-1).SetDelay(1f);
+        _soundNoiseRight.transform.DOShakeScale(.2f, 0.01f, 1).SetLoops(-1).SetDelay(1f);
+    }
+
+    private void DisableNoiseVisualFXs()
+    {
+        _soundNoiseLeft.enabled = false;
+        _soundNoiseRight.enabled = false;
     }
 }

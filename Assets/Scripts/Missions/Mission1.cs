@@ -17,7 +17,7 @@ public class Mission1 : MonoBehaviour
         {
             GameEvents.Instance.LeaveCutScene();
             SoundsManager.Instance.PlayDoorBell();
-            _missionTracker.SetNewObjective("Vá até a porta de entrada");
+            _missionTracker.SetNewObjective("Go to the front door");
             GameSettings.Instance.ChangeGameState(GameStates.Playing);
         });
     }
@@ -28,7 +28,7 @@ public class Mission1 : MonoBehaviour
         {
             GameSettings.Instance.ChangeGameState(GameStates.CutScene);
             GameEvents.Instance.EnterCutScene();
-            GameEvents.Instance.ShowTextPanel("Ué, parece que não tem ninguém aqui.. será que estou ouvindo coisas?");
+            GameEvents.Instance.ShowTextPanel("Huh, seems like there's no one here... I think I'm hearing things...\nI should go back to the room.");
             DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
             {
                 GameEvents.Instance.LeaveCutScene();
