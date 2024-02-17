@@ -17,6 +17,10 @@ public class MissionTracker : MonoBehaviour
     private List<Light2D> _sceneLights = new();
     [SerializeField]
     private Light2D _lightningLight;
+    [SerializeField]
+    private GameObject _powerRoomDoor;
+    [SerializeField]
+    private GameObject _doorsToBarricade, _pills;
     [Header("Missions")]
     [SerializeField]
     private Mission2 _mission2;
@@ -26,8 +30,6 @@ public class MissionTracker : MonoBehaviour
     private Mission4 _mission4;
     [SerializeField]
     private FinalMission _finalMission;
-    [SerializeField]
-    private GameObject _powerRoomDoor;
 
     private void Start()
     {
@@ -35,7 +37,7 @@ public class MissionTracker : MonoBehaviour
         _introPanel.DOFade(1, 0f);
         _introPanel.DOFade(0, 5f);
         _moveTipTXT.DOFade(0, 0f);
-        DOVirtual.Float(0, 1, 5f, (v) => { }).OnComplete(() =>
+        DOVirtual.Float(0, 1, 11f, (v) => { }).OnComplete(() =>
         {
             _moveTipTXT.DOFade(1, 3f).OnComplete(() =>
             {
@@ -108,6 +110,21 @@ public class MissionTracker : MonoBehaviour
 
     public void OpenLastRoomDoor()
     {
+        _powerRoomDoor.SetActive(false);
+    }
+
+    public void CloseLastRoomDoor()
+    {
         _powerRoomDoor.SetActive(true);
+    }
+
+    public void EnableDoorsToBarricade()
+    {
+        _doorsToBarricade.SetActive(true);
+    }
+
+    public void EnablePillsToFind()
+    {
+        _pills.SetActive(true);
     }
 }

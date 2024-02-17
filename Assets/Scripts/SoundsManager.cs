@@ -6,7 +6,7 @@ using DG.Tweening;
 public class SoundsManager : Singleton<SoundsManager>
 {
     [SerializeField]
-    private AudioClip _doorbell, _lightningStrike, _doorKnocking, _takingPill;
+    private AudioClip _doorbell, _lightningStrike, _doorKnocking, _takingPill, _barricadeFX;
     [SerializeField]
     private AudioSource _audioSourceLoop, _audioSourceFXs, _audioSourceIntroMusic;
     [SerializeField]
@@ -72,5 +72,15 @@ public class SoundsManager : Singleton<SoundsManager>
             });
 
         });
+    }
+
+    public void PlayDoorBaricated()
+    {
+        _audioSourceFXs.PlayOneShot(_barricadeFX);
+    }
+
+    public void PlayAudioClip(AudioClip clip)
+    {
+        _audioSourceFXs.PlayOneShot(clip);
     }
 }

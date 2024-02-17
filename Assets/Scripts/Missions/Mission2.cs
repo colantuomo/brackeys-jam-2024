@@ -44,7 +44,6 @@ public class Mission2 : MonoBehaviour
                 DOVirtual.Float(0, 1, 0.5f, (v) => { }).OnComplete(() =>
                 {
                     GameEvents.Instance.TurnOffAllTheLights();
-
                 });
                 DOVirtual.Float(0, 1, 4f, (v) => { }).OnComplete(() =>
                 {
