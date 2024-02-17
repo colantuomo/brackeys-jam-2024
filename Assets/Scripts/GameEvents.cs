@@ -40,4 +40,16 @@ public class GameEvents : Singleton<GameEvents>
     {
         OnTurnOffAllTheLights?.Invoke();
     }
+
+    public event Action<float> OnUpdateSanityLevel;
+    public void UpdateSanityLevel(float sanityAmount)
+    {
+        OnUpdateSanityLevel?.Invoke(sanityAmount);
+    }
+
+    public event Action<float> OnUpdateSanityDecreaseRate;
+    public void UpdateSanityDecreaseRate(float sanityRateDecreaseAmount)
+    {
+        OnUpdateSanityDecreaseRate?.Invoke(sanityRateDecreaseAmount);
+    }
 }
