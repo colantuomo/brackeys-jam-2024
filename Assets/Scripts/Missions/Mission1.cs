@@ -9,6 +9,8 @@ public class Mission1 : MonoBehaviour
     private MissionTracker _missionTracker;
     [SerializeField]
     private float _timeToStartGame = 7f;
+    [SerializeField]
+    private Transform _player;
 
     private void Start()
     {
@@ -24,20 +26,21 @@ public class Mission1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameSettings.Instance.ChangeGameState(GameStates.CutScene);
-        GameEvents.Instance.EnterCutScene();
-        GameEvents.Instance.ShowTextPanel("Ué, parece que não tem ninguém aqui.. será que estou ouvindo coisas?");
-        DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
+        DOVirtual.Float(0, 1, .2f, (v) => { }).OnComplete(() =>
         {
-            GameEvents.Instance.LeaveCutScene();
-            GameSettings.Instance.ChangeGameState(GameStates.Playing);
-
+            GameSettings.Instance.ChangeGameState(GameStates.CutScene);
+            GameEvents.Instance.EnterCutScene();
+            GameEvents.Instance.ShowTextPanel("Ué, parece que não tem ninguém aqui.. será que estou ouvindo coisas?");
+            DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
+            {
+                GameEvents.Instance.LeaveCutScene();
+                GameSettings.Instance.ChangeGameState(GameStates.Playing);
+            });
         });
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //GameEvents.Instance.LeaveCutScene();
         GameEvents.Instance.CloseTextPanel();
         _missionTracker.ClearObjective();
         _missionTracker.StartMission2();

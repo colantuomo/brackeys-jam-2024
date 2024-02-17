@@ -17,12 +17,6 @@ public class PlayerInteractions : MonoBehaviour
         {
             OnPlayerInteract?.Invoke();
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //GameEvents.Instance.ShowTextPanel("Será que essa merda funciona?");
-            GameEvents.Instance.EnterCutScene();
-        }
     }
 
     public void CanInteract(bool canInteract)
@@ -33,5 +27,10 @@ public class PlayerInteractions : MonoBehaviour
     public void TurnOnFlashlight()
     {
         _flashlight.gameObject.SetActive(true);
+    }
+
+    public void TurnOffFlashlight()
+    {
+        _flashlight.gameObject.SetActive(false);
     }
 }

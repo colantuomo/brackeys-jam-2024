@@ -12,7 +12,7 @@ public class MissionTracker : MonoBehaviour
     [SerializeField]
     private Image _introPanel;
     [SerializeField]
-    private TMP_Text _objectiveTXT;
+    private TMP_Text _objectiveTXT, _moveTipTXT;
     [SerializeField]
     private List<Light2D> _sceneLights = new();
     [SerializeField]
@@ -24,12 +24,24 @@ public class MissionTracker : MonoBehaviour
     private Mission3 _mission3;
     [SerializeField]
     private Mission4 _mission4;
+    [SerializeField]
+    private FinalMission _finalMission;
+    [SerializeField]
+    private GameObject _powerRoomDoor;
 
     private void Start()
     {
         GameEvents.Instance.OnTurnOffAllTheLights += OnTurnOffAllTheLights;
         _introPanel.DOFade(1, 0f);
         _introPanel.DOFade(0, 5f);
+        _moveTipTXT.DOFade(0, 0f);
+        DOVirtual.Float(0, 1, 5f, (v) => { }).OnComplete(() =>
+        {
+            _moveTipTXT.DOFade(1, 3f).OnComplete(() =>
+            {
+                _moveTipTXT.DOFade(0, 3f);
+            });
+        });
     }
 
     private void OnTurnOffAllTheLights()
@@ -72,18 +84,27 @@ public class MissionTracker : MonoBehaviour
     public void StartMission3()
     {
         SetNewObjective("Encontre seu smartphone");
-        DOVirtual.Float(0, 1, GameSettings.Instance.TimeToStartSecondMission, (v) => { }).OnComplete(() =>
-        {
-            _mission3.gameObject.SetActive(true);
-        });
+        _mission3.gameObject.SetActive(true);
     }
 
     public void StartMission4()
     {
         SetNewObjective("Pegue seu remédio");
-        DOVirtual.Float(0, 1, GameSettings.Instance.TimeToStartSecondMission, (v) => { }).OnComplete(() =>
-        {
-            _mission4.gameObject.SetActive(true);
-        });
+        _mission4.gameObject.SetActive(true);
+    }
+
+    public void StartFinalMission()
+    {
+        _finalMission.gameObject.SetActive(true);
+    }
+
+    public void TurnOffLightningLight()
+    {
+        _lightningLight.gameObject.SetActive(false);
+    }
+
+    public void OpenLastRoomDoor()
+    {
+        _powerRoomDoor.SetActive(true);
     }
 }

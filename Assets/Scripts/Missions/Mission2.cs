@@ -19,7 +19,8 @@ public class Mission2 : MonoBehaviour
         SoundsManager.Instance.PitchDownRain(3f);
         DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
         {
-            SoundsManager.Instance.PlayDoorBell();
+            //SoundsManager.Instance.PlayDoorBell();
+            SoundsManager.Instance.PlayDoorKnocking();
         });
         DOVirtual.Float(0, 1, _cutSceneTime, (v) => { }).OnComplete(() =>
         {
@@ -32,25 +33,29 @@ public class Mission2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameSettings.Instance.ChangeGameState(GameStates.CutScene);
-        GameEvents.Instance.EnterCutScene();
-        DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
+        DOVirtual.Float(0, 1, .2f, (v) => { }).OnComplete(() =>
         {
-            _missionTracker.ClearObjective();
-            SoundsManager.Instance.PlayLightningStrike();
-            DOVirtual.Float(0, 1, 1.5f, (v) => { }).OnComplete(() =>
+            GameSettings.Instance.ChangeGameState(GameStates.CutScene);
+            GameEvents.Instance.EnterCutScene();
+            DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
             {
-                GameEvents.Instance.TurnOffAllTheLights();
-
-            });
-            DOVirtual.Float(0, 1, 4f, (v) => { }).OnComplete(() =>
-            {
-                GameEvents.Instance.ShowTextPanel("Preciso ir até o disjuntor no porão, acho que ele desarmou.. mas preciso pegar o meu celular antes");
-                DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
+                _missionTracker.ClearObjective();
+                SoundsManager.Instance.PlayLightningStrike();
+                DOVirtual.Float(0, 1, 0.5f, (v) => { }).OnComplete(() =>
                 {
-                    GameSettings.Instance.ChangeGameState(GameStates.Playing);
-                });
+                    GameEvents.Instance.TurnOffAllTheLights();
 
+                });
+                DOVirtual.Float(0, 1, 4f, (v) => { }).OnComplete(() =>
+                {
+                    GameEvents.Instance.ShowTextPanel("Preciso ir até o disjuntor no porão, acho que ele desarmou.. mas preciso pegar o meu celular antes");
+                    DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
+                    {
+                        GameEvents.Instance.LeaveCutScene();
+                        GameSettings.Instance.ChangeGameState(GameStates.Playing);
+                    });
+
+                });
             });
         });
 
@@ -58,7 +63,6 @@ public class Mission2 : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        GameEvents.Instance.LeaveCutScene();
         GameEvents.Instance.CloseTextPanel();
         _missionTracker.ClearObjective();
         _missionTracker.StartMission3();
