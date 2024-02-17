@@ -26,6 +26,7 @@ public class Mission4 : MonoBehaviour
             _interactableText.HideText();
             _missionTracker.ClearObjective();
             SoundsManager.Instance.PlayTakingPill();
+            GameEvents.Instance.UpdateSanityLevel();
             DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
             {
                 GameEvents.Instance.ShowTextPanel("Ah.. estou melhor, agora preciso ver o disjuntor");
@@ -42,7 +43,9 @@ public class Mission4 : MonoBehaviour
         _missionTracker.SetNewObjective("Encontre o Disjuntor");
         GameEvents.Instance.CloseTextPanel();
         _missionTracker.StartFinalMission();
-        //_missionTracker.OpenLastRoomDoor();
+        _missionTracker.EnableDoorsToBarricade();
+        _missionTracker.EnablePillsToFind();
+        _missionTracker.OpenLastRoomDoor();
         gameObject.SetActive(false);
     }
 }

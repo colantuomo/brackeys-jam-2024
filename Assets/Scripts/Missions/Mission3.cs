@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Mission3 : MonoBehaviour
 {
@@ -33,7 +34,12 @@ public class Mission3 : MonoBehaviour
             _audioSource.enabled = false;
             GameEvents.Instance.ShowTextPanel("Achei!\nDroga! ta na hora de eu tomar meu remédio.. sei que está aqui no quarto em algum lugar..");
             _playerInteractions.TurnOnFlashlight();
-            GameSettings.Instance.ChangeGameState(GameStates.Playing);
+            GameEvents.Instance.ContinueSanityDecreasing();
+            GameSettings.Instance.ChangeGameState(GameStates.CutScene);
+            DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
+            {
+                GameSettings.Instance.ChangeGameState(GameStates.Playing);
+            });
         }
     }
 

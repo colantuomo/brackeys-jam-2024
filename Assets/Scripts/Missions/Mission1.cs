@@ -9,8 +9,6 @@ public class Mission1 : MonoBehaviour
     private MissionTracker _missionTracker;
     [SerializeField]
     private float _timeToStartGame = 7f;
-    [SerializeField]
-    private Transform _player;
 
     private void Start()
     {

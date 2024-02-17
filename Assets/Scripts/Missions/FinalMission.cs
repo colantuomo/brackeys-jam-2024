@@ -9,7 +9,7 @@ public class FinalMission : MonoBehaviour
     [SerializeField]
     private MissionTracker _missionTracker;
     [SerializeField]
-    private GameObject _powerLightRoom;
+    private GameObject _powerLightRoom, _finalDoorNoise;
     [SerializeField]
     private PlayerInteractions _playerInteractions;
 
@@ -26,11 +26,14 @@ public class FinalMission : MonoBehaviour
             _missionTracker.ClearObjective();
             _powerLightRoom.SetActive(true);
             _playerInteractions.TurnOffFlashlight();
+            _finalDoorNoise.SetActive(true);
+            _missionTracker.CloseLastRoomDoor();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _interactableText.HideText();
+        gameObject.SetActive(false);
     }
 }
