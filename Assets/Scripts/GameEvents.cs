@@ -64,4 +64,10 @@ public class GameEvents : Singleton<GameEvents>
     {
         OnContinueSanityDecreasing?.Invoke();
     }
+
+    public event Action OnPlayerDied;
+    public void PlayerDied()
+    {
+        OnPlayerDied?.Invoke();
+    }
 }

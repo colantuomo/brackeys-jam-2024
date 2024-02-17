@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DoorNoise : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class DoorNoise : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField]
     private float _noiseDamage = 5f;
+    [SerializeField]
+    private SpriteRenderer _barricadedDoor, _soundNoiseLeft, _soundNoiseRight;
+    [SerializeField]
+    private NoiseDamageArea _noiseDamageArea;
 
     float timer;
     float interval = 1;
+
+    private bool _isBarricaded;
 
     private void Start()
     {
@@ -22,6 +29,8 @@ public class DoorNoise : MonoBehaviour
 
     private void Update()
     {
+        if (_isBarricaded) return;
+
         timer += Time.deltaTime;
         if (timer > interval)
         {
@@ -58,13 +67,20 @@ public class DoorNoise : MonoBehaviour
 
     private void Barricate()
     {
-        _audioSource.gameObject.SetActive(false);
+        _barricadedDoor.gameObject.SetActive(true);
+        _audioSource.enabled = false;
         SoundsManager.Instance.PlayDoorBaricated();
-        gameObject.SetActive(false);
+        _noiseDamageArea.gameObject.SetActive(false);
+        _interactableText.gameObject.SetActive(false);
+        _isBarricaded = true;
+        DisableNoiseVisualFXs();
     }
 
     public void TakeNoiseDamage()
     {
+        if (_isBarricaded) return;
+
+        ShowVisualNoiseFX();
         GameEvents.Instance.UpdateSanityDecreaseRate(_noiseDamage);
     }
 
@@ -77,5 +93,17 @@ public class DoorNoise : MonoBehaviour
     {
         //_audioSource.Stop();
         _audioSource.PlayOneShot(GetRandomKnockSound());
+    }
+
+    private void ShowVisualNoiseFX()
+    {
+        _soundNoiseLeft.transform.DOShakeScale(.2f, 0.01f, 1).SetLoops(-1).SetDelay(1f);
+        _soundNoiseRight.transform.DOShakeScale(.2f, 0.01f, 1).SetLoops(-1).SetDelay(1f);
+    }
+
+    private void DisableNoiseVisualFXs()
+    {
+        _soundNoiseLeft.enabled = false;
+        _soundNoiseRight.enabled = false;
     }
 }

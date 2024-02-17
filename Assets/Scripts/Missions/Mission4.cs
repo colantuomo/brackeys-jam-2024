@@ -29,7 +29,7 @@ public class Mission4 : MonoBehaviour
             GameEvents.Instance.UpdateSanityLevel();
             DOVirtual.Float(0, 1, 3f, (v) => { }).OnComplete(() =>
             {
-                GameEvents.Instance.ShowTextPanel("Ah.. estou melhor, agora preciso ver o disjuntor");
+                GameEvents.Instance.ShowTextPanel("Ah... I feel better... only this way the noises won't drive me insane! Now I need to turn the light back on.");
                 GameSettings.Instance.ChangeGameState(GameStates.Playing);
             });
         }
@@ -40,7 +40,7 @@ public class Mission4 : MonoBehaviour
         _interactableText.HideText();
         if (!_tookMedicine) return;
         _missionTracker.TurnOffLightningLight();
-        _missionTracker.SetNewObjective("Encontre o Disjuntor");
+        _missionTracker.SetNewObjective("Find the room to turn the light back on.");
         GameEvents.Instance.CloseTextPanel();
         _missionTracker.StartFinalMission();
         _missionTracker.EnableDoorsToBarricade();

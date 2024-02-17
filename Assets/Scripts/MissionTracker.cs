@@ -88,13 +88,13 @@ public class MissionTracker : MonoBehaviour
 
     public void StartMission3()
     {
-        SetNewObjective("Encontre seu smartphone");
+        SetNewObjective("Find your Phone");
         _mission3.gameObject.SetActive(true);
     }
 
     public void StartMission4()
     {
-        SetNewObjective("Pegue seu remédio");
+        SetNewObjective("Find your medication");
         _mission4.gameObject.SetActive(true);
     }
 

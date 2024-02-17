@@ -11,6 +11,8 @@ public class PlayerInteractions : MonoBehaviour
     public event Action OnPlayerInteract;
     [SerializeField]
     private Light2D _flashlight;
+    [SerializeField]
+    private GameObject _cat;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && _canInteract)
@@ -32,5 +34,10 @@ public class PlayerInteractions : MonoBehaviour
     public void TurnOffFlashlight()
     {
         _flashlight.gameObject.SetActive(false);
+    }
+
+    public void ShowCat()
+    {
+        _cat.SetActive(true);
     }
 }

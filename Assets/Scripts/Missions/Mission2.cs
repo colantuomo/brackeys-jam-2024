@@ -27,7 +27,7 @@ public class Mission2 : MonoBehaviour
             SoundsManager.Instance.PitchNormalRain();
             CamerasManager.Instance.BackToNormal();
             GameSettings.Instance.ChangeGameState(GameStates.Playing);
-            _missionTracker.SetNewObjective("Volte até a porta");
+            _missionTracker.SetNewObjective("Go back to the front door");
         });
     }
 
@@ -47,7 +47,7 @@ public class Mission2 : MonoBehaviour
                 });
                 DOVirtual.Float(0, 1, 4f, (v) => { }).OnComplete(() =>
                 {
-                    GameEvents.Instance.ShowTextPanel("Preciso ir até o disjuntor no porão, acho que ele desarmou.. mas preciso pegar o meu celular antes");
+                    GameEvents.Instance.ShowTextPanel("Damn, the light went out! I need to turn it back on... but where's my phone?");
                     DOVirtual.Float(0, 1, 2f, (v) => { }).OnComplete(() =>
                     {
                         GameEvents.Instance.LeaveCutScene();
