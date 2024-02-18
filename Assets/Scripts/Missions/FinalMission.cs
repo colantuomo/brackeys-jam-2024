@@ -12,13 +12,14 @@ public class FinalMission : MonoBehaviour
     [SerializeField]
     private MissionTracker _missionTracker;
     [SerializeField]
-    private GameObject _powerLightRoom, _finalDoorNoise, _exitGameButton;
+    private GameObject _powerLightRoom, _finalDoorNoise, _exitGameButton, _circuitUP, circuitDOWN;
     [SerializeField]
     private PlayerInteractions _playerInteractions;
     [SerializeField]
     private Image _blankPanel, _blackPanel, _catImage;
     [SerializeField]
     private TMP_Text _finalText;
+    private bool _isGameFinished;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class FinalMission : MonoBehaviour
 
     private void OnPlayerDied()
     {
+        if (!_isGameFinished) return;
         //EngameManager.Instance.LoadEndgame();
         _finalDoorNoise.SetActive(false);
         GameSettings.Instance.ChangeGameState(GameStates.CutScene);
@@ -74,6 +76,8 @@ public class FinalMission : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            _circuitUP.SetActive(false);
+            _isGameFinished = true;
             _interactableText.HideText();
             _missionTracker.ClearObjective();
             _powerLightRoom.SetActive(true);

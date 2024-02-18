@@ -10,6 +10,8 @@ public class Mission4 : MonoBehaviour
     private bool _tookMedicine;
     [SerializeField]
     private InteractableBehaviour _interactableText;
+    [SerializeField]
+    private GameObject _medicine;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,6 +23,7 @@ public class Mission4 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && !_tookMedicine)
         {
+            _medicine.SetActive(false);
             GameSettings.Instance.ChangeGameState(GameStates.CutScene);
             _tookMedicine = true;
             _interactableText.HideText();

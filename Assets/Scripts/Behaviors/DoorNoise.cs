@@ -67,7 +67,7 @@ public class DoorNoise : MonoBehaviour
 
     private void Barricate()
     {
-        _barricadedDoor.gameObject.SetActive(true);
+        _barricadedDoor.enabled = true;
         _audioSource.enabled = false;
         SoundsManager.Instance.PlayDoorBaricated();
         _noiseDamageArea.gameObject.SetActive(false);

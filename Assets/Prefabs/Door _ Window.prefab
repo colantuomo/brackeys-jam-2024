@@ -366,7 +366,7 @@ MonoBehaviour:
   _knockFXs:
   - {fileID: 8300000, guid: 7a1f3cd268c932c41b811bc8db2a7308, type: 3}
   - {fileID: 8300000, guid: 584399d52d3a70e4696c98f1ee712846, type: 3}
-  _noiseDamage: 5
+  _noiseDamage: 3
   _barricadedDoor: {fileID: 281778321890214625}
   _soundNoiseLeft: {fileID: 1074425513}
   _soundNoiseRight: {fileID: 2091385103}

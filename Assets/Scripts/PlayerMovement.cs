@@ -15,12 +15,15 @@ public class PlayerMovement : MonoBehaviour
     private Animator _anim;
     [SerializeField]
     private AnimationClip _idleUp, _idleDown, _idleLeft, _idleRight;
+    [SerializeField]
+    private AudioSource _audioSource;
 
     void Start()
     {
         _cam = Camera.main;
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         GameSettings.Instance.OnChangeGameState += OnChangeGameState;
     }
 
@@ -44,7 +47,16 @@ public class PlayerMovement : MonoBehaviour
         //var pos = transform.position - Input.mousePosition;
         //var posX = Mathf.Abs(pos.x / Screen.width);
         //var posY = Mathf.Abs(pos.y / Screen.height);
-        _anim.SetBool("isWalking", _movement != Vector2.zero);
+        var isMoving = _movement != Vector2.zero;
+        _anim.SetBool("isWalking", isMoving);
+        if (isMoving)
+        {
+            _audioSource.volume = 0.7f;
+        }
+        else
+        {
+            _audioSource.volume = 0f;
+        }
     }
 
     void FixedUpdate()
