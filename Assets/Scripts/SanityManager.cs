@@ -64,7 +64,8 @@ public class SanityManager : MonoBehaviour
             {
                 DOTween.KillAll();
                 //print("You died");
-                Pause();
+                //Pause();
+                _isPaused = true;
                 GameEvents.Instance.PlayerDied();
                 //GameSettings.Instance.ChangeGameState(GameStates.CutScene);
             }

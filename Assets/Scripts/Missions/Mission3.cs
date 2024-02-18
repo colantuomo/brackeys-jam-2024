@@ -13,6 +13,8 @@ public class Mission3 : MonoBehaviour
     private bool _pickedPhone;
     [SerializeField]
     private InteractableBehaviour _interactableText;
+    [SerializeField]
+    private GameObject _phone;
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -28,6 +30,7 @@ public class Mission3 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && !_pickedPhone)
         {
+            _phone.SetActive(false);
             _missionTracker.TurnOffLightningLight();
             _interactableText.HideText();
             _pickedPhone = true;
