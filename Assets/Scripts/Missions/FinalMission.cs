@@ -12,17 +12,23 @@ public class FinalMission : MonoBehaviour
     [SerializeField]
     private MissionTracker _missionTracker;
     [SerializeField]
-    private GameObject _powerLightRoom, _finalDoorNoise;
+    private GameObject _powerLightRoom, _finalDoorNoise, _exitGameButton;
     [SerializeField]
     private PlayerInteractions _playerInteractions;
     [SerializeField]
-    private Image _blankPanel, _blackPanel;
+    private Image _blankPanel, _blackPanel, _catImage;
     [SerializeField]
     private TMP_Text _finalText;
 
     private void Start()
     {
         GameEvents.Instance.OnPlayerDied += OnPlayerDied;
+    }
+
+    private void OnEnable()
+    {
+        _catImage.gameObject.SetActive(true);
+        _catImage.DOFade(0, 0);
     }
 
     private void OnPlayerDied()
@@ -33,6 +39,8 @@ public class FinalMission : MonoBehaviour
         SoundsManager.Instance.ReduceRainToZero(3f);
         _blackPanel.DOFade(1, 5f).OnComplete(() =>
         {
+            GameEvents.Instance.UpdateSanityLevel(100);
+            SoundsManager.Instance.PlayCatMeow();
             _playerInteractions.ShowCat();
             _blackPanel.DOFade(0, 2f).OnComplete(() =>
             {
@@ -45,6 +53,10 @@ public class FinalMission : MonoBehaviour
                         {
                             _finalText.gameObject.SetActive(true);
                             _finalText.DOFade(1, 1f);
+                            _catImage.DOFade(1, 1f).OnComplete(() =>
+                            {
+                                _exitGameButton.SetActive(true);
+                            });
                         });
                     });
                 });

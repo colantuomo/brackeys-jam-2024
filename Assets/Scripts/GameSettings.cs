@@ -27,4 +27,9 @@ public class GameSettings : Singleton<GameSettings>
         GameState = state;
         OnChangeGameState?.Invoke(state);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

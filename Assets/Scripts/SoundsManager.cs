@@ -6,7 +6,7 @@ using DG.Tweening;
 public class SoundsManager : Singleton<SoundsManager>
 {
     [SerializeField]
-    private AudioClip _doorbell, _lightningStrike, _doorKnocking, _takingPill, _barricadeFX;
+    private AudioClip _doorbell, _lightningStrike, _doorKnocking, _takingPill, _barricadeFX, _catMeow;
     [SerializeField]
     private AudioSource _audioSourceLoop, _audioSourceFXs, _audioSourceIntroMusic;
     [SerializeField]
@@ -87,5 +87,10 @@ public class SoundsManager : Singleton<SoundsManager>
     public Tween ReduceRainToZero(float seconds = 5f)
     {
         return _audioSourceLoop.DOFade(0, seconds);
+    }
+
+    public void PlayCatMeow()
+    {
+        _audioSourceFXs.PlayOneShot(_catMeow);
     }
 }
