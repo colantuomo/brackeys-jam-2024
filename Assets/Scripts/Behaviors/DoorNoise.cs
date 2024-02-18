@@ -11,7 +11,7 @@ public class DoorNoise : MonoBehaviour
     private List<AudioClip> _knockFXs = new();
     private AudioSource _audioSource;
     [SerializeField]
-    private float _noiseDamage = 5f;
+    private float _noiseDamage = 2.5f;
     [SerializeField]
     private SpriteRenderer _barricadedDoor, _soundNoiseLeft, _soundNoiseRight;
     [SerializeField]
@@ -25,6 +25,7 @@ public class DoorNoise : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _noiseDamage = 2f;
     }
 
     private void Update()

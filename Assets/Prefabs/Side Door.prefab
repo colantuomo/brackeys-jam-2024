@@ -735,7 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8730018965397796815, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.689
+      value: 0.946
       objectReference: {fileID: 0}
     - target: {fileID: 8730018965397796815, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -756,6 +756,14 @@ PrefabInstance:
     - target: {fileID: 8730018966115657628, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
       propertyPath: m_text
       value: Pres F to barricade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730018966115657628, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
+      propertyPath: m_fontSize
+      value: 24.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730018966115657628, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
+      propertyPath: m_text
+      value: Press F To barricade
       objectReference: {fileID: 0}
     - target: {fileID: 8730018966115657628, guid: 195a6e64dbb983a418627c7d4bdc102d, type: 3}
       propertyPath: m_fontSize
